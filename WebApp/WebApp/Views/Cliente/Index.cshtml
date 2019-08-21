@@ -13,6 +13,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayName("Código")
+        </th>
+        <th>
             @Html.DisplayName("Nome")
         </th>
         <th>
@@ -30,6 +33,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.cd_codicli)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.no_nomepes)
         </td>
         <td>
@@ -42,9 +48,9 @@
             @Html.DisplayFor(modelItem => item.dt_cadastr)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.cd_codicli }) |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.cd_codicli }) |
-            @Html.ActionLink("Excluir", "Delete", new { id=item.cd_codicli })
+            @Html.ActionLink("Editar", "Edit", new { id = item.cd_codicli }) |
+            @Html.ActionLink("Detalhes", "Details", new { id = item.cd_codicli }) |
+            @Html.ActionLink("Excluir", "Delete", new { id = item.cd_codicli })
         </td>
     </tr>
 }
