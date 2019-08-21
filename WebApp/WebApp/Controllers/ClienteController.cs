@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApp.Context;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
@@ -31,13 +32,19 @@ namespace WebApp.Controllers
 
         // POST: Cliente/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Cliente cliente)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    //cliente.dt_cadastr.Add();
+                    db.Cliente.Add(cliente);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(cliente);
             }
             catch
             {

@@ -10,9 +10,9 @@ namespace WebApp.Models
     {
         [Key]
         public int cd_codicli { get; set; }
-        public string no_nomepes { get; set; }
+        public String no_nomepes { get; set; }
         public DateTime dt_nascime { get; set; }
-        public string ds_cpfcnpj { get; set; }
+        public String ds_cpfcnpj { get; set; }
         public DateTime dt_cadastr { get; set; }
     }
 }
