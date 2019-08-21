@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApp.Models.Cliente>
+
+@{
+    ViewBag.Title = "Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Clientes</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar novo Cliente", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nome")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dt_nascime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ds_cpfcnpj)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dt_cadastr)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.no_nomepes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dt_nascime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ds_cpfcnpj)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dt_cadastr)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.cd_codicli }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.cd_codicli }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.cd_codicli })
+        </td>
+    </tr>
+}
+
+</table>
