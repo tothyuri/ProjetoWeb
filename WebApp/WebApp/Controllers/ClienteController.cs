@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApp.Context;
@@ -21,7 +23,16 @@ namespace WebApp.Controllers
         // GET: Cliente/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            if (id == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var cliente = db.Cliente.Find(id);
+            if(cliente == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cliente);
         }
 
         // GET: Cliente/Create
@@ -55,18 +66,32 @@ namespace WebApp.Controllers
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (id == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var cliente = db.Cliente.Find(id);
+            if (cliente == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cliente);
         }
 
         // POST: Cliente/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Cliente cliente)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    db.Entry(cliente).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-                return RedirectToAction("Index");
+                return View(cliente);
             }
             catch
             {
@@ -77,7 +102,8 @@ namespace WebApp.Controllers
         // GET: Cliente/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var cliente = db.Cliente.Find(id);
+            return View(cliente);
         }
 
         // POST: Cliente/Delete/5
